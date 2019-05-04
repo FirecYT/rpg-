@@ -1,13 +1,15 @@
-var rect = function(x, y, width, height, color){
+var rect = function(x, y, width, height, colorConst, clolorActive){
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
-	this.color = color;
+	this.ative = 0;
+	this.colorConst = colorConst;
+	this.clolorActive = clolorActive || colorConst;
 }
 rect.prototype.draw = function(canvas) {
 	ctx = canvas.getContext('2d');
-	ctx.fillStyle = this.color;
+	ctx.fillStyle = this.active?this.clolorActive:this.colorConst;
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 };
 
@@ -31,14 +33,17 @@ title.prototype.draw = function(canvas) {
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 };
 
-var sprite = function (src, x, y) {
+var sprite = function (src, x, y, color) {
 	this.x = x;
 	this.y = y;
+	this.color = color;
 	this.image = new Image();
 	this.image.src = src;
 }
 sprite.prototype.draw = function(canvas) {
 	ctx = canvas.getContext('2d');
+	ctx.fillStyle = this.color || "#00000000";
+	ctx.fillRect(this.x, this.y, this.image.width, this.image.height);
 	ctx.drawImage(this.image, this.x, this.y);
 };
 
