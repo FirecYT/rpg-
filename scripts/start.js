@@ -1,8 +1,5 @@
 'use strict'; // Милорд, нам нужно больше локальности
 
-let mouse_cnv = doc[getId]("mouse"); // Ты даун, canvas никогда не видел? Иди дальше читай
-let start_cnv = doc[getId]("start"); // Дальше, это дальше, а не на строчку ниже
-
 let start = [new rect(0, 0, 512, 512, "#666"), new sprite("titleStart.png", 0, 0, "#333")] // Фон и полоска сверху
 let classes = [ // Классы
 	new rect(32, 64, 128, 128, "#777", "#555"),
@@ -20,12 +17,12 @@ let secrets = {
 
 
 
-mouse_cnv.addEventListener("mouseup", (e)=>{ // Кнопка мыши была поднята (вроде бы и ПКМ и ЛКМ)
+let mouseup = (e)=>{ // Кнопка мыши была поднята (вроде бы и ПКМ и ЛКМ)
 	let cX = e.layerX; // Я не индус, буду дулать код короче
 	let cY = e.layerY;
 
 	for(let i in classes){ // Отслеживание пересечение курсора с каким нибудь классом
-		if ( colis({x: cX, y: cY}, generateRect(classes[i])) ) {
+		if ( collision({x: cX, y: cY}, generateRect(classes[i])) ) {
 			if( classes[i].image ) { // Если это спрайт
 				if ( classes[i].image.src.split("/")[10]=="lock.png") break; // Если класса не, то делать нам тут нечего
 			}
@@ -34,31 +31,56 @@ mouse_cnv.addEventListener("mouseup", (e)=>{ // Кнопка мыши была �
 		}
 	}
 
-	if( colis({x: e.layerX, y: e.layerY}, generateRect(classes[4])) ) classes[4] = secrets.loli; // Лоли 2.0
+	if( collision({x: e.layerX, y: e.layerY}, generateRect(classes[4])) ) classes[4] = secrets.loli; // Лоли 2.0
+
+	if( collision({x: e.layerX, y: e.layerY}, generateRect(enter)) ) { // Ну это, если выбрали класс
+		var _class = -1;
+		for(let i in classes){
+			if (classes[i].active==2) {
+				if (_class==-1) {
+					_class=i;
+				} else {
+					alert("Магию выключай и давай нормально.");
+					_class=-1
+				}
+			}
+		}
+		if (_class<=-1) {
+			alert("Выбери себе класс, мать твою!");
+		} else {
+			start_cnv.style.display = "none";
+			startGame();
+		}
+	}
 
 	drawAll();
-})
-mouse_cnv.addEventListener("mousemove", (e)=>{ // Движение курсора
-	let cX = e.layerX; // Я не индус, буду дулать код короче
+}
+let mousemove = (e)=>{ // Движение курсора
+	let cX = e.layerX; // Я не индус, буду дулать код коро... Сука!
 	let cY = e.layerY;
 
 	for(let i in classes){ // Отслеживание пересечение курсора с каким нибудь классом
 		if ( classes[i].active==2 ) {
 			// Нам нечего делать с "зелёным" классом
-		} else if ( colis({x: cX, y: cY}, generateRect(classes[i])) ) { // А вот с обычно изи
+		} else if ( collision({x: cX, y: cY}, generateRect(classes[i])) ) { // А вот с обычно изи
 			classes[i].active=1; // Если пересёкся, то делаем его активным
 		} else { // Иначе делаем не активным (нам же нужно вернуть цвет)
 			classes[i].active=0;
 		}
 	}
-	if( colis({x: cX, y: cY}, generateRect(enter)) ){ // То же самое с enter'ом
+	if( collision({x: cX, y: cY}, generateRect(enter)) ){ // То же самое с enter'ом
 		enter.active=1;
 	} else {
 		enter.active=0;
 	}
 
 	drawAll();
-})
+}
+
+
+
+mouse_cnv.addEventListener("mouseup", mouseup);
+mouse_cnv.addEventListener("mousemove", mousemove);
 
 
 

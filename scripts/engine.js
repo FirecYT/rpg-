@@ -27,24 +27,18 @@ rect.prototype.draw = function(cnv) {
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 };
 
-var title = function (src, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
-	this.sx = sx;
-	this.sy = sy;
-	this.swidth = sWidth;
-	this.sheight = sHeight;
-
-	this.dx = dx;
-	this.sy = dy;
-	this.dwidth = dWidth;
-	this.dHeight = dHeight;
+var title = function (src, x, y, width, height) {
+	this.x = x*8;
+	this.y = y*8;
+	this.width = width*8;
+	this.height = height*8;
 
 	this.image = new Image();
 	this.image.src = "./images/"+src;
 }
-title.prototype.draw = function(cnv) {
+title.prototype.draw = function(cnv, x, y, width, height) {
 	let ctx = cnv.getContext('2d');
-	ctx.fillStyle = this.color;
-	ctx.fillRect(this.x, this.y, this.width, this.height);
+	ctx.drawImage(this.image, this.x, this.y, this.width, this.height, x, y, width, height);
 };
 
 var sprite = function (src, x, y, colorConst, colorActive, colorClicked) {
@@ -84,7 +78,7 @@ var clear = function(cnv) {
 	ctx.clearRect(0, 0, 512, 512);
 };
 
-var text = function(cnv, text, x, y, color, font) {
+var text = function(cnv, text, x, y, color, font) { // To delete
 	let ctx = cnv.getContext('2d');
 	ctx.fillStyle = color;
 	ctx.font = font || "8px Consolas";
@@ -95,9 +89,20 @@ var generateRect = function(obj) {
 	return {x: obj.x, y: obj.y, w: obj.width || obj.image.width, h: obj.height || obj.image.height}
 }
 
-var colis = function(mouse, object) { // mouse = {x, y} object = {x, y, w, h}
+var collision = function(mouse, object) { // mouse = {x, y} object = {x, y, w, h}
 	return (mouse.x>=object.x && mouse.y>=object.y && mouse.x<=object.w+object.x && mouse.y<=object.h+object.y);
 }
+
+var array_move = function(arr, old_index, new_index) {
+	if (new_index >= arr.length) {
+		var k = new_index - arr.length + 1;
+		while (k--) {
+			arr.push(undefined);
+		}
+	}
+	arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+	return arr; // for testing
+};
 
 var doc = document;
 var getId = "getElementById";
