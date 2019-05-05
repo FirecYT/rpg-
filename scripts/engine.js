@@ -1,3 +1,5 @@
+'use strict';
+
 var rect = function(x, y, width, height, colorConst, colorActive, colorClicked){
 	this.x = x;
 	this.y = y;
@@ -9,8 +11,8 @@ var rect = function(x, y, width, height, colorConst, colorActive, colorClicked){
 	this.colorActive = colorActive || colorConst;
 	this.colorClicked = colorClicked || "#AFA";
 }
-rect.prototype.draw = function(canvas) {
-	ctx = canvas.getContext('2d');
+rect.prototype.draw = function(cnv) {
+	let ctx = cnv.getContext('2d');
 	switch(this.active){
 		case 0:
 			ctx.fillStyle = this.colorConst;
@@ -39,8 +41,8 @@ var title = function (src, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
 	this.image = new Image();
 	this.image.src = "./images/"+src;
 }
-title.prototype.draw = function(canvas) {
-	ctx = canvas.getContext('2d');
+title.prototype.draw = function(cnv) {
+	let ctx = cnv.getContext('2d');
 	ctx.fillStyle = this.color;
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 };
@@ -57,8 +59,8 @@ var sprite = function (src, x, y, colorConst, colorActive, colorClicked) {
 	this.image = new Image();
 	this.image.src = "./images/"+src;
 }
-sprite.prototype.draw = function(canvas) {
-	ctx = canvas.getContext('2d');
+sprite.prototype.draw = function(cnv) {
+	let ctx = cnv.getContext('2d');
 	switch(this.active){
 		case 0:
 			ctx.fillStyle = this.colorConst;
@@ -77,13 +79,13 @@ sprite.prototype.setSRC = function(src) {
 	this.image.src = "./images/"+src;
 };
 
-var clear = function(canvas) {
-	ctx = canvas.getContext('2d');
+var clear = function(cnv) {
+	let ctx = cnv.getContext('2d');
 	ctx.clearRect(0, 0, 512, 512);
 };
 
-var text = function(canvas, text, x, y, color, font) {
-	ctx = canvas.getContext('2d');
+var text = function(cnv, text, x, y, color, font) {
+	let ctx = cnv.getContext('2d');
 	ctx.fillStyle = color;
 	ctx.font = font || "8px Consolas";
 	ctx.fillText(text, x, y);
@@ -97,5 +99,5 @@ var colis = function(mouse, object) { // mouse = {x, y} object = {x, y, w, h}
 	return (mouse.x>=object.x && mouse.y>=object.y && mouse.x<=object.w+object.x && mouse.y<=object.h+object.y);
 }
 
-doc = document;
-getId = "getElementById";
+var doc = document;
+var getId = "getElementById";
