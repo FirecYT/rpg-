@@ -1,5 +1,5 @@
 ﻿'use strict';
-
+// Тут всё просто, так что без комментариев
 var rect = function(x, y, width, height, colorConst, colorActive, colorClicked){
 	this.x = x;
 	this.y = y;
