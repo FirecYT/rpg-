@@ -48,7 +48,7 @@ var triggers = [
 
 var npc = [
 	//[room, trigger, posNPC, id]
-	[2, {x:4,y:0,w:2,h:1}, {x:4,y:1,w:0,h:0}, 0]
+	[2, {x:3,y:1,w:2,h:1}, {x:4,y:1,w:0,h:0}, 0]
 ]
 
 
@@ -66,7 +66,7 @@ let tick = function(e) {
 		}
 	}
 	for(let i in npc){
-		if( room==npc[i][0] && collision({x: searchPlayer()[0], y: searchPlayer()[1]}, npc[i][1]) && collision({x: Math.floor(cX/size), y: Math.floor(cY/size)}, triggers[i][2])){
+		if( room==npc[i][0] && collision({x: searchPlayer()[0], y: searchPlayer()[1]}, npc[i][1]) && collision({x: Math.floor(cX/size), y: Math.floor(cY/size)}, npc[i][2])){
 			bot(npc[i][3]);
 			break;
 		}
