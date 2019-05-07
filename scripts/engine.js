@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var rect = function(x, y, width, height, colorConst, colorActive, colorClicked){
 	this.x = x;

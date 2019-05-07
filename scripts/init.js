@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var mouse_cnv = doc[getId]("mouse");
 var start_cnv = doc[getId]("start");

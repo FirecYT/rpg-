@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var map = [
 	[	[0,0,0,0,0,0,0,0],
