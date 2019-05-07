@@ -104,5 +104,9 @@ var array_move = function(arr, old_index, new_index) {
 	return arr; // for testing
 };
 
+var randomInt = function(max) {
+	return Math.round(Math.random()*max);
+}
+
 var doc = document;
 var getId = "getElementById";

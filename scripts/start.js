@@ -24,7 +24,7 @@ let mouseup = (e)=>{ // Кнопка мыши была поднята (врод�
 	for(let i in classes){ // Отслеживание пересечение курсора с каким нибудь классом
 		if ( collision({x: cX, y: cY}, generateRect(classes[i])) ) {
 			if( classes[i].image ) { // Если это спрайт
-				if ( classes[i].image.src.split("/")[10]=="lock.png") break; // Если класса не, то делать нам тут нечего
+				if ( classes[i].image.src.split("/")[classes[i].image.src.split("/").length-1]=="lock.png") break; // Если класса не, то делать нам тут нечего
 			}
 			for(let j in classes) classes[j].active = 0; // Делаем у всех классов 0 active
 			classes[i].active = 2; // А нажатый будет с active 2
