@@ -112,6 +112,11 @@ let bot = function(id) {
 let canGo = function(x, y) { // Особенно с этой
 	if(map[room][y][x]!=0){return false;} // Не переместиться в стенку
 	let pos = searchPlayer();
+	if( Math.abs(x-pos[0]) + Math.abs(y-pos[1]) == 2) {
+		if(map[room][pos[1]][(+pos[0]+ +(x-pos[0]))]==2 && map[room][(+pos[1]+ +(y-pos[1]))][pos[0]]==2){
+			return false;
+		}
+	}
 	if( Math.abs(x-pos[0]) <= 1 && Math.abs(y-pos[1]) <= 1) return true;
 	return false;
 }
