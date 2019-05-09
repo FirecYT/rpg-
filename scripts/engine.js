@@ -30,8 +30,8 @@ rect.prototype.draw = function(cnv) {
 var title = function (src, x, y, width, height) {
 	this.x = x*8;
 	this.y = y*8;
-	this.width = width*8;
-	this.height = height*8;
+	this.width = width*8 || 16*8;
+	this.height = height*8 || 16*8;
 
 	this.image = new Image();
 	this.image.src = "./images/"+src;
