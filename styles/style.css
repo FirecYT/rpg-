@@ -12,3 +12,7 @@ canvas {
 	left: 50%;
 	margin: -256px 0 0 -256px;
 }
+#gui {
+	width: 0px;
+	margin: -256px 0 0 0;
+}

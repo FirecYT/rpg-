@@ -6,7 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
-Совет: для хороший игры зажми Ctrl и покрути колёсико.<br>
+Совет: для хороший игры зажми Ctrl и покрути колёсико.<br><br><br>
+<button id="inv_btn" onclick="alert('Нажми на персонажа во время игры, аутист.')">Открыть инвентарь</button>
 <!--
 +-----------------------+
 |tttttttttt t tttttttttt|
@@ -19,13 +20,13 @@
 -->
 
 <canvas id="game" width=512 height=512></canvas>
-<canvas id="gui" width=512 height=512></canvas>
 <canvas id="start" width=512 height=512>Error 0x00000A</canvas>
-<canvas id="mouse" width=512 height=512></canvas>
+<canvas id="gui" width=512 height=512></canvas>
 
 <script sync type="text/javascript" src="scripts/engine.js"></script>
 <script sync type="text/javascript" src="scripts/init.js"></script>
 <script sync type="text/javascript" src="scripts/start.js"></script>
 <script sync type="text/javascript" src="scripts/game.js"></script>
+<script sync type="text/javascript" src="scripts/gui.js"></script>
 </body>
 </html>

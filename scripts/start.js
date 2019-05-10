@@ -81,8 +81,8 @@ let mousemove = (e)=>{ // Движение курсора
 
 
 
-mouse_cnv.addEventListener("mouseup", mouseup); // Вешаем слушатели событий
-mouse_cnv.addEventListener("mousemove", mousemove);
+start_cnv.addEventListener("mouseup", mouseup); // Вешаем слушатели событий
+start_cnv.addEventListener("mousemove", mousemove);
 
 
 
@@ -92,8 +92,7 @@ let drawAll = function() { // Функция для рисования всег�
 	enter.draw(start_cnv);
 }
 
-window.onload = function() { // Что бы всё прогрузилось. Это тебе не рашка, перед релизом фильм не посмотришь.
+window.addEventListener("load", ()=>{ // Что бы всё прогрузилось. Это тебе не рашка, перед релизом фильм не посмотришь.
 	drawAll();
-}
-
+});
 // Дуров, верни стену!

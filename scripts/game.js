@@ -52,11 +52,18 @@ var npc = [ // Массив NPC
 	[2, {x:3,y:1,w:2,h:1}, {x:4,y:1,w:0,h:0}, 0]
 ]
 
-let player = [ // Позиции играка для каждой локации.
+let playerPos = [ // Позиции играка для каждой локации.
 	{x:4,y:3},
 	{x:2,y:0},
 	{x:0,y:5}
 ]
+
+let player = {
+	hp: 100,
+	mp: 100,
+	exp: 10,
+	lvl: 9999
+}
 
 
 
@@ -84,10 +91,12 @@ let fakeTick = function(e) { // Тик или как это ещё можно о
 	drawMap(); // Рисуем карту
 }
 
+let realTick = function() {}
+
 var startGame = function(){ // Функция запуска игры
-	mouse_cnv.removeEventListener("mouseup", mouseup); // Удаляем все слушатели
-	mouse_cnv.removeEventListener("mousemove", mousemove);
-	mouse_cnv.addEventListener("mouseup", fakeTick); // Добавляем новый
+	game_cnv.removeEventListener("mouseup", mouseup); // Удаляем все слушатели
+	game_cnv.removeEventListener("mousemove", mousemove);
+	game_cnv.addEventListener("mouseup", fakeTick); // Добавляем новый
 
 	for(let n in map) { // Ну и тут случайно генерируются бочки
 		for(let y in map[n]) {
@@ -105,7 +114,7 @@ var startGame = function(){ // Функция запуска игры
 
 
 let bot = function(id, oldPos) { // Обработка ботов. Тут без комментариев
-	player[room]={x:oldPos[0],y:oldPos[1]};
+	playerPos[room]={x:oldPos[0],y:oldPos[1]};
 	switch(id){
 		case 0:
 			alert("Ещё слишком рано... Приходи, когда будет обновление с ботами!");
@@ -140,18 +149,11 @@ let drawMap = function() { // Отрисовка карты
 		if(npc[i][0]==room) idMap[3].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
 	}
 	
-	idMap[1].img.draw(game_cnv, player[room].x*size, player[room].y*size, size, size);
+	idMap[1].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
 }
 
 let searchPlayer = function() { // Поиск персонажа.
-	for(let y in map[room]) { // Перебераем карту
-		for(let x in map[room][y]){
-			if(map[room][y][x]==1){ // И если нашли элемент равный 1
-				return [x, y]; // То возвращаем координаты
-			}
-		}
-	}
-	return [player[room].x, player[room].y]
+	return [playerPos[room].x, playerPos[room].y]
 }
 
 let move = function(cX, cY) { // Ну а это движение (неожиданно, да?)
@@ -161,7 +163,8 @@ let move = function(cX, cY) { // Ну а это движение (неожида
 				if(canGo(x, y)){ // И если может двигаться
 					let pos = searchPlayer(); // То получаем координаты
 					// И двигаем
-					player[room]={x:x,y:y};
+					playerPos[room]={x:x,y:y};
+					realTick();
 				}
 			}
 		}
