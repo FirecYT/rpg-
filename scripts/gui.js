@@ -10,10 +10,11 @@ let tab = 0; // Открытая вкладка
 
 
 window.addEventListener("load", ()=>{
+	setInterval(drawInv, 10)
 	drawInv();
 })
 
-let drawInv = function() {
+var drawInv = function() {
 	bg.draw(gui_cnv);
 
 	for(let i in tabs){
@@ -21,7 +22,7 @@ let drawInv = function() {
 	}
 	switch(tab){
 		case 0:
-			text(gui_cnv,"HP: "+player.hp,32,32+32,"#333","32px monospace");
+			(player.hp<=0)?text(gui_cnv,"You die",32,32+32,"#A33","32px monospace"):text(gui_cnv,"HP: "+player.hp,32,32+32,"#333","32px monospace");
 			text(gui_cnv,"MP: "+player.mp,32,32+64,"#333","32px monospace");
 
 			text(gui_cnv,"EXP: "+player.exp,32,128+32,"#333","32px monospace");
