@@ -75,6 +75,11 @@ var player = {
 
 
 
+let realTick = function() {
+	bot();
+}
+
+
 let fakeTick = function(e) { // Тик или как это ещё можно обозвать?
 	let cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
 	let cY = e.layerY;
@@ -125,10 +130,11 @@ let bot = function() {
 			let y = (randomInt(1)==1)?bots[i][1].y-1:bots[i][1].y+1;
 
 			let botPos = bots[i][1];
+			let plyPos = searchPlayer();
 
-			console.log(x,playerPos[room].x,y,playerPos[room].y);
-			if (x==playerPos[room].x && y==playerPos[room].y){
-				player.hp-=75;
+			if(collision({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
+				player.hp-=25;
+				return;
 			}
 
 			// Передвижение бота
@@ -153,11 +159,6 @@ let NPC = function(id, oldPos) { // Обработка ботов. Тут без
 			alert("Ещё слишком рано... Приходи, когда будет обновление с ботами!");
 			break;
 	}
-}
-
-
-let realTick = function() {
-	bot();
 }
 
 // Далее идут какие-то функции. Я бы сказал вспомогательные, но с ними возишься дольше.
@@ -225,7 +226,6 @@ let move = function(cX, cY) { // Ну а это движение (неожида
 		for(let x in map[room][y]){
 			if( collision({x: cX, y: cY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
 				if(canGo(x, y)){ // И если может двигаться
-					let pos = searchPlayer(); // То получаем координаты
 					// И двигаем
 					playerPos[room]={x:x,y:y};
 					realTick();

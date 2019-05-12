@@ -1,8 +1,8 @@
-'use strict';
+﻿'use strict';
 
 let inv = 0;
 
-let bg = new rect(0, 0, 512, 512, "#666"); // Задний фон
+let bg = new rect(0, 0, 512, 512, "#555"); // Задний фон
 let tabs = [ // Вкладки
 	new sprite("invMenuStatus.png", 0, 480, "#333")
 ]
@@ -15,6 +15,10 @@ window.addEventListener("load", ()=>{
 })
 
 var drawInv = function() {
+	game_cnv.style["filter"]="grayscale("+ +(100-player.hp)/2+"%)";
+	game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
+
+
 	bg.draw(gui_cnv);
 
 	for(let i in tabs){
@@ -22,14 +26,26 @@ var drawInv = function() {
 	}
 	switch(tab){
 		case 0:
-			(player.hp<=0)?text(gui_cnv,"You die",32,32+32,"#A33","32px monospace"):text(gui_cnv,"HP: "+player.hp,32,32+32,"#333","32px monospace");
-			text(gui_cnv,"MP: "+player.mp,32,32+64,"#333","32px monospace");
+			if(player.hp<=0){
+				text(gui_cnv,"You die",32,32+32,"#FAA","32px Pixel Cyr, monospace");
+				game_cnv.style["filter"]="grayscale(100%) blur(2px)";
+				game_cnv.style["-webkit-filter"]="grayscale(100%), blur(3px)";
 
-			text(gui_cnv,"EXP: "+player.exp,32,128+32,"#333","32px monospace");
-			text(gui_cnv,"LVL: "+player.lvl,32,128+64,"#333","32px monospace");
+				game_cnv.removeEventListener("mouseup", fakeTick);
+				game_cnv.removeEventListener("mouseup", openInv);
+				inv=0;
+					game_cnv.style.margin="-256px 0 0 -512px";
+					gui_cnv.style.margin="-256px 0 0 0";
+					gui_cnv.style.width="512px";
+			} else {
+				text(gui_cnv,"HP: "+player.hp,32,32+32,"#AAA","32px Pixel Cyr, monospace");
+				text(gui_cnv,"MP: "+player.mp,32,32+64,"#AAA","32px Pixel Cyr, monospace");
 
-			text(gui_cnv,"На этом всё.",32,256+32,"#333","32px monospace");
-			text(gui_cnv,"Остальное будет не скоро.",32,256+64,"#333","32px monospace");
+				text(gui_cnv,"EXP: "+player.exp,32,128+32,"#AAA","32px Pixel Cyr, monospace");
+				text(gui_cnv,"LVL: "+player.lvl,32,128+64,"#AAA","32px Pixel Cyr, monospace");
+			}
+			text(gui_cnv,"На этом всё.",32,256+32,"#AAA","32px Pixel Cyr, monospace");
+			text(gui_cnv,"Остальное будет не скоро.",32,256+64,"#AAA","32px Pixel Cyr, monospace");
 			break;
 	}
 }
@@ -45,9 +61,11 @@ let openInv = function(e){
 		inv=!inv;
 		if(inv){
 			game_cnv.style.margin="-256px 0 0 -512px";
+			gui_cnv.style.margin="-256px 0 0 0";
 			gui_cnv.style.width="512px";
 		} else {
 			game_cnv.style.margin="-256px 0 0 -256px";
+			gui_cnv.style.margin="-256px 0 0 256px";
 			gui_cnv.style.width="0px";
 		}
 	}
