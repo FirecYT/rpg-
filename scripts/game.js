@@ -118,6 +118,8 @@ var startGame = function(){ // Функция запуска игры
 		}
 	}
 
+	if (_class==5) player.hp=0;
+
 	drawMap(); // И рисуем в который раз карту...
 }
 
@@ -164,8 +166,12 @@ let NPC = function(id, oldPos) { // Обработка ботов. Тут без
 // Далее идут какие-то функции. Я бы сказал вспомогательные, но с ними возишься дольше.
 let canGo = function(x, y) { // Особенно с этой
 	let pos = searchPlayer(); // Находим персонажа
+	console.log(x,y);
 
 	if(x==pos[0] && y==pos[1]){return false;} // Не переместиться в себя
+	for(let i in npc){
+		if(npc[i][0]==room && x==npc[i][2].x && y==npc[i][2].y){return false;} // Не переместиться в NPC
+	}
 	for(let i in bots){
 		if(bots[i][0]==room && x==bots[i][1].x && y==bots[i][1].y){return false;} // Не переместиться в бота
 	}
@@ -185,6 +191,10 @@ let canGoBot = function(pos, x, y) {
 	if (x<0||x>7||y<0||y>7) {return false;}
 	if (x==playerPos[room].x&&y==playerPos[room].y) {return false;}
 
+
+	for(let i in npc){
+		if(npc[i][0]==room && x==npc[i][2].x && y==npc[i][2].y){return false;} // Не переместиться в NPC
+	}
 	for(let i in bots){
 		if(x==bots[i][1].x && y==bots[i][1].y){return false;} // Не переместиться в бота
 	}

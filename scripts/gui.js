@@ -15,10 +15,6 @@ window.addEventListener("load", ()=>{
 })
 
 var drawInv = function() {
-	game_cnv.style["filter"]="grayscale("+ +(100-player.hp)/2+"%)";
-	game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
-
-
 	bg.draw(gui_cnv);
 
 	for(let i in tabs){
@@ -38,6 +34,9 @@ var drawInv = function() {
 					gui_cnv.style.margin="-256px 0 0 0";
 					gui_cnv.style.width="512px";
 			} else {
+				game_cnv.style["filter"]="grayscale("+ +(100-player.hp)/2+"%)";
+				game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
+				
 				text(gui_cnv,"HP: "+player.hp,32,32+32,"#AAA","32px Pixel Cyr, monospace");
 				text(gui_cnv,"MP: "+player.mp,32,32+64,"#AAA","32px Pixel Cyr, monospace");
 
@@ -48,6 +47,11 @@ var drawInv = function() {
 			text(gui_cnv,"Остальное будет не скоро.",32,256+64,"#AAA","32px Pixel Cyr, monospace");
 			break;
 	}
+
+		if(_class==5){
+			text(gui_cnv,"Ты лох",32,256+64+32,"#77F","32px Pixel Cyr, monospace");
+			text(gui_cnv,"Иди от сюда",32,256+64+64,"#77F","32px Pixel Cyr, monospace");
+		}
 }
 
 
