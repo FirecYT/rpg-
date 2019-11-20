@@ -1,0 +1,844 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fw",
+				"fwd_messages"
+			],
+			[
+				"V",
+				"Vector3"
+			],
+			[
+				"text-a",
+				"text-align\tproperty"
+			],
+			[
+				"bor",
+				"border\tproperty"
+			],
+			[
+				"Ge",
+				"GetAxis"
+			],
+			[
+				"new",
+				"newRoom"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"Ra",
+				"Range"
+			],
+			[
+				"Ro",
+				"RoomPrefs"
+			],
+			[
+				"max",
+				"maxX"
+			],
+			[
+				"fr",
+				"frame"
+			],
+			[
+				"ge",
+				"getElementById"
+			],
+			[
+				"get",
+				"getHistory"
+			],
+			[
+				"inn",
+				"innerText"
+			],
+			[
+				"a",
+				"auto\toverflow"
+			],
+			[
+				"text",
+				"text"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"wall",
+				"wallPost"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"acc",
+				"access_token"
+			],
+			[
+				"to",
+				"tokenInp"
+			],
+			[
+				"b",
+				"bottom\tproperty"
+			],
+			[
+				"f",
+				"fixed\tposition"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"S",
+				"toShifr"
+			],
+			[
+				"bott",
+				"margin-bottom\tproperty"
+			],
+			[
+				"inl",
+				"inline-block\tdisplay"
+			],
+			[
+				"t",
+				"type\tAttr"
+			],
+			[
+				"col",
+				"color\tproperty"
+			],
+			[
+				"scr",
+				"scroll-behavior\tproperty"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"msgF",
+				"msgFrom"
+			],
+			[
+				"msg",
+				"msgFrom"
+			],
+			[
+				"ms",
+				"msgPeer-2000000000"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"fill",
+				"fillText"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"w",
+				"W"
+			],
+			[
+				"ar",
+				"array\t$… = array (…)"
+			],
+			[
+				"send",
+				"sendMessage"
+			],
+			[
+				"fun",
+				"fun\tfunction …"
+			],
+			[
+				"jso",
+				"json_decode"
+			],
+			[
+				"cre",
+				"create_dialog"
+			],
+			[
+				"h",
+				"hp"
+			],
+			[
+				"vr",
+				"vars"
+			],
+			[
+				"se",
+				"speedConst"
+			],
+			[
+				"co",
+				"code"
+			],
+			[
+				"gam",
+				"GAME"
+			],
+			[
+				"ke",
+				"keys"
+			],
+			[
+				"cos",
+				"console"
+			],
+			[
+				"obje",
+				"objects"
+			],
+			[
+				"u",
+				"urlencode"
+			],
+			[
+				"box",
+				"box-shadow\tproperty"
+			],
+			[
+				"ba",
+				"background\tproperty"
+			],
+			[
+				"fo",
+				"font-family\tproperty"
+			],
+			[
+				"mar",
+				"margin-top\tproperty"
+			],
+			[
+				"s",
+				"size\tproperty"
+			],
+			[
+				"font-s",
+				"font-style\tproperty"
+			],
+			[
+				"bl",
+				"block\tdisplay"
+			],
+			[
+				"gro",
+				"group_id"
+			],
+			[
+				"te",
+				"text-align-last\tproperty"
+			],
+			[
+				"m",
+				"menuSelect"
+			],
+			[
+				"tex",
+				"text-decoration-line\tproperty"
+			],
+			[
+				"ca",
+				"class\tAttr"
+			],
+			[
+				"li",
+				"li\tTag"
+			],
+			[
+				"fon",
+				"font-size\tproperty"
+			],
+			[
+				"bdrs",
+				"bdrs\tborder-radius"
+			],
+			[
+				"marg",
+				"margin\tproperty"
+			],
+			[
+				"d",
+				"div\tTag"
+			],
+			[
+				"hea",
+				"head\tTag"
+			],
+			[
+				"bord",
+				"border\tproperty"
+			],
+			[
+				"btn",
+				"btnClick"
+			],
+			[
+				"ma",
+				"margin-bottom\tproperty"
+			],
+			[
+				"borde",
+				"border-radius\tproperty"
+			],
+			[
+				"bac",
+				"background-color\tproperty"
+			],
+			[
+				"SetC",
+				"SetCursorPosition(int left, int top)\tvoid"
+			],
+			[
+				"msgT",
+				"msgTime"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"pee",
+				"msgPeer"
+			],
+			[
+				"strstr",
+				"stristr"
+			],
+			[
+				"ur",
+				"urlencode"
+			],
+			[
+				"pe",
+				"peerOfMessage"
+			],
+			[
+				"кно",
+				"Кнопки"
+			],
+			[
+				"Ga",
+				"GameObject"
+			],
+			[
+				"Sta",
+				"StartCoroutine"
+			],
+			[
+				"wo",
+				"WorkerBonus"
+			],
+			[
+				"sho",
+				"shopBtns"
+			],
+			[
+				"shop",
+				"shopPrices"
+			],
+			[
+				"i",
+				"itemID"
+			],
+			[
+				"sc",
+				"score"
+			],
+			[
+				"cl",
+				"click_price"
+			],
+			[
+				"vid",
+				"vidE"
+			],
+			[
+				"v",
+				"video\tTag"
+			],
+			[
+				"pr",
+				"progress"
+			],
+			[
+				"pla",
+				"playerInfo"
+			],
+			[
+				"p",
+				"progress"
+			],
+			[
+				"pl",
+				"plusToObj"
+			],
+			[
+				"br",
+				"break"
+			],
+			[
+				"on",
+				"onGround"
+			],
+			[
+				"log",
+				"loger"
+			],
+			[
+				"he",
+				"height-in"
+			],
+			[
+				"wid",
+				"width\tproperty"
+			],
+			[
+				"st",
+				"style\tTag"
+			],
+			[
+				"me",
+				"meta\tTag"
+			],
+			[
+				"bo",
+				"border\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "style.css",
+			"settings":
+			{
+				"buffer_size": 435,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 307,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game.js",
+			"settings":
+			{
+				"buffer_size": 6460,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"file new",
+				"File: New View into File"
+			],
+			[
+				"ren",
+				"Rename File"
+			],
+			[
+				"Re",
+				"Rename File"
+			],
+			[
+				"Ren",
+				"Rename File"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 165.0,
+		"history":
+		[
+			"npm",
+			"brew install mono",
+			"Package Control.sublime-package",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/даниил/Documents/.FIREC/RPG"
+	],
+	"file_history":
+	[
+		"/C/Users/даниил/Documents/.FIREC/RPG/graphic2D.js",
+		"/C/Users/даниил/Documents/.FIREC/STT/main.js",
+		"/D/Unity Projects/RPG Offline/Assets/Controller.cs",
+		"/C/Users/даниил/Documents/.FIREC/BOT/TKG/test.ini",
+		"/C/Users/даниил/Documents/.FIREC/BOT/TKG/index.php",
+		"/D/Unity Projects/RPG/Assets/Scripts/LookAtMouse.cs",
+		"/D/Unity Projects/RPG/Assets/Scripts/Camera.cs",
+		"/D/Unity Projects/RPG/Assets/Scripts/PlayerControl.cs",
+		"/C/Users/даниил/Documents/.FIREC/QUEST/QUEST.sublime-project",
+		"/C/Users/даниил/Documents/.FIREC/QUEST/QUEST.sublime-workspace",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-3/index.php",
+		"/C/Users/даниил/Documents/.FIREC/BOT/TKG/ban/203600687",
+		"/C/Apache24/htdocs/Work/FHelp/index.html",
+		"/C/Apache24/htdocs/Work/FHelp/style.css",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Шифр Клёна (название временное)/index.html",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/style.css",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/css.css",
+		"/D/Unity Projects/MMO/Assets/Scenes/scene1.unity",
+		"/D/Unity Projects/MyGame/Assets/MyGame.sublime-project",
+		"/C/Users/даниил/AppData/Roaming/Sublime Text 3/Packages/User/syntax_fold.sublime-settings",
+		"/C/Users/даниил/AppData/Roaming/Sublime Text 3/Packages/SyntaxFold/syntax_fold.sublime-settings",
+		"/C/Users/даниил/Documents/.FIREC/VK API/script.js",
+		"/C/Users/даниил/Documents/.FIREC/VK API/style.css",
+		"/C/Users/даниил/Documents/.FIREC/VK API/index.html",
+		"/D/Unity Projects/MyGame/Assets/Materials/Terrain.mat",
+		"/C/Apache24/htdocs/Work/FHelp/script.js",
+		"/C/Users/даниил/Documents/.FIREC/RPG/style.css",
+		"/C/Users/даниил/Documents/.FIREC/RPG/game.js",
+		"/C/Users/даниил/Documents/.FIREC/Python/test.py",
+		"/C/Users/даниил/Documents/.FIREC/BOT/TKG/indexTest1.php",
+		"/C/Users/даниил/Documents/.FIREC/BOT/TKG/indexTest2.php",
+		"/C/Users/даниил/Documents/.FIREC/RPG/index.html",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Chat/bd.json",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/log.txt",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Chat/main.php",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/bd.json",
+		"/C/Users/даниил/Documents/.FIREC/BOT/MrSpiel/index.php",
+		"/C/Users/даниил/Documents/.FIREC/BOT/Admin/index.php",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Chat/config.txt",
+		"/C/Users/даниил/Documents/.FIREC/BOT/example.php",
+		"/C/Apache24/htdocs/Work/oWithoutJS/index.html",
+		"/C/Apache24/htdocs/Work/oWithoutJS/style.css",
+		"/C/Apache24/conf/httpd.conf",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Квест",
+		"/C/Apache24/htdocs/Work/oWithJS/script.js",
+		"/C/Apache24/htdocs/Work/oWithJS/index.html",
+		"/C/Apache24/htdocs/Work/oWithJS/style.css",
+		"/C/Apache24/htdocs/Work/style.css",
+		"/C/Apache24/htdocs/Work/script.js",
+		"/C/Apache24/htdocs/Work/index.html",
+		"/C/Apache24/htdocs/Work/calc/index.html",
+		"/C/Apache24/htdocs/Work/script-calc.js",
+		"/C/Apache24/htdocs/Work/calc.html",
+		"/C/Apache24/htdocs/Anime/video.html",
+		"/C/Users/даниил/Documents/.FIREC/CPP/compile.bat",
+		"/C/Users/даниил/Documents/.FIREC/CPP/Shark/main.cs",
+		"/C/Users/даниил/index.html",
+		"/C/Users/даниил/AppData/Roaming/Sublime Text 3/Packages/User/OmniSharpSublime.sublime-settings",
+		"/C/Users/даниил/AppData/Roaming/Sublime Text 3/Packages/OmniSharp/OmniSharpSublime.sublime-settings",
+		"/C/Users/даниил/Documents/.FIREC/CPP/Trackpad/Main.cpp",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Quest/init.js",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Quest/main.js",
+		"/D/Servers/MTA Server/mods/deathmatch/mtaserver.conf",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/174475426",
+		"/C/Users/даниил/Documents/.FIREC/BOT/MrSpiel/Backup.rar",
+		"/D/Unity Projects/Android Clicker/Assets/Scripts/Game.cs",
+		"/C/Users/даниил/Documents/.FIREC/BOT/test.php",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/.htpasswd",
+		"/C/Users/даниил/Desktop/example.php",
+		"/C/Users/даниил/AppData/Local/Temp/aida4-1.php",
+		"/C/Users/даниил/AppData/Local/Temp/aida0_0_3.php",
+		"/C/Users/даниил/AppData/Local/Temp/aida0_2_0.php",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/.htaccess",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Quest/css.css",
+		"/C/Users/даниил/Desktop/yyy_site.html",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/index.php",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/a.php",
+		"/C/Users/даниил/Desktop/zzz_site.html",
+		"/D/Servers/MinecraftForge/server.properties",
+		"/C/Users/даниил/AppData/Local/Temp/example-3.php",
+		"/C/Users/даниил/Documents/.FIREC/MrSpiel/index.php",
+		"/C/Users/даниил/AppData/Local/Temp/fz3temp-2/main.js",
+		"/C/Users/даниил/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Quest/index.html",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Quest/js.js",
+		"/C/Users/даниил/Documents/.FIREC/MyFirefox/src/VK Plus/page-editor.js",
+		"/C/Apache24/htdocs/autoindex/style.css",
+		"/C/Apache24/conf/extra/httpd-autoindex.conf",
+		"/C/Apache24/F-Files/style.css",
+		"/C/Apache24/logs/error.log",
+		"/C/Apache24/conf/extra/apache-default-modules.conf",
+		"/C/Users/даниил/Desktop/a_site.html",
+		"/C/Apache24/conf/openssl.cnf",
+		"/C/Apache24/modules/mod_autoindex.so",
+		"/C/Apache24/htdocs/index.html",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Шифры для новичка.txt",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Квест/css.css",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Квест/js.js",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/Квест/index.html",
+		"/C/Users/даниил/Documents/.FIREC/heh/index.php",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/css.css",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/квест.html",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/для себя.txt",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/i2.html",
+		"/C/Users/даниил/Documents/.FIREC/.ИНТЕЛЕКТУАЛЫ/index.html",
+		"/C/Users/даниил/Documents/.FIREC/lick.js",
+		"/C/Users/даниил/Documents/.FIREC/heh/sniffer.php",
+		"/C/Users/даниил/Documents/.FIREC/heh/index.html",
+		"/C/Users/даниил/Documents/.FIREC/proxy.pac",
+		"/C/Users/даниил/Desktop/zzz.html"
+	],
+	"find":
+	{
+		"height": 42.0
+	},
+	"find_in_files":
+	{
+		"height": 103.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 435,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								149,
+								149
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "game.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6065,
+								6065
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2165.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "QUEST.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 155.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

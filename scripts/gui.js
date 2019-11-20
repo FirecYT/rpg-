@@ -8,14 +8,19 @@ let tabs = [ // Вкладки
 ]
 let tab = 0; // Открытая вкладка
 
-
 window.addEventListener("load", ()=>{
 	setInterval(drawInv, 10)
 	drawInv();
 })
 
+var upPanale = new rect(0, 0, 512, 32, "#333");
+var invClose = new rect(480, 0, 32, 32, "#700");
+
 var drawInv = function() {
 	bg.draw(gui_cnv);
+
+	upPanale.draw(gui_cnv);
+	invClose.draw(gui_cnv);
 
 	for(let i in tabs){
 		tabs[i].draw(gui_cnv);
@@ -54,6 +59,19 @@ var drawInv = function() {
 		}
 }
 
+let updInvOpen = function() {
+	if(inv){
+		game_cnv.style.width="0px";
+		gui_cnv.style.margin="-256px 0 0 -256px";
+		gui_cnv.style.width="512px";
+		console.log("A");
+	} else {
+		game_cnv.style.width="512px";
+		gui_cnv.style.margin="-256px 0 0 256px";
+		gui_cnv.style.width="0px";
+		console.log("B");
+	}
+}
 
 let openInv = function(e){
 	let cX = e.layerX; // Я индус
@@ -63,17 +81,19 @@ let openInv = function(e){
 
 	if (Math.floor(cX/64)==pos[0] && Math.floor(cY/64)==pos[1]) {
 		inv=!inv;
-		if(inv){
-			game_cnv.style.margin="-256px 0 0 -512px";
-			gui_cnv.style.margin="-256px 0 0 0";
-			gui_cnv.style.width="512px";
-		} else {
-			game_cnv.style.margin="-256px 0 0 -256px";
-			gui_cnv.style.margin="-256px 0 0 256px";
-			gui_cnv.style.width="0px";
-		}
+		updInvOpen();
 	}
 }
 
+let InvEvent = function(e) {
+	let cX = e.layerX; // Я индус
+	let cY = e.layerY;
+
+	if(collision({x: cX, y: cY}, generateRect(invClose))){
+		inv=!inv;
+		updInvOpen();
+	}
+}
 
 game_cnv.addEventListener("mouseup", openInv);
+gui_cnv.addEventListener("mouseup", InvEvent);
