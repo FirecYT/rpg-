@@ -25,8 +25,8 @@ var map = [ // Создаём массив с картами (пробелы н�
 		[0, 0, 2, 5, 5, 5, 2, 0],
 		[3, 0, 2, 2, 5, 2, 2, 0],
 		[4, 4, 4, 4, 4, 0, 0, 0],
-		[3, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0]]
+		[3, 0, 0, 0, 4, 0, 0, 0],
+		[0, 0, 0, 0, 4, 0, 0, 0]]
 ]
 var idMap = [ // Массив с idMap объектов на карте
 /* 0. Пол. Скин: асфальт */		{solid: 0, img: new title("title.png",0,0)},
@@ -60,41 +60,45 @@ var bots = [ // Массив ботов
 	[2, {x:4,y:5}]
 ]
 
-let playerPos = [ // Позиции играка для каждой локации.
+var playerPos = [ // Позиции играка для каждой локации.
 	{x:4,y:3},
 	{x:2,y:0},
 	{x:0,y:5}
 ]
 
-var player = {
-	hp: 100,
-	mp: 100,
-	exp: 10,
-	lvl: 9999
-}
+
+var _classes_pref = [
+	{hp: 25,mp: 0,exp: 0,lvl: 0},
+	{hp: 100,mp: 0,exp: 0,lvl: 0},
+	{hp: 100,mp: 0,exp: 0,lvl: 0},
+	{hp: 100,mp: 0,exp: 0,lvl: 0},
+	{hp: 9999,mp: 9999,exp: 9999,lvl: 9999},
+	{hp: 0,mp: 0,exp: 999,lvl: 9999}
+]
+
+var player;
 
 
-
-let realTick = function() {
+var realTick = function() {
 	bot();
 }
 
 
-let fakeTick = function(e) { // Тик или как это ещё можно обозвать?
-	let cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
-	let cY = e.layerY;
+var fakeTick = function(e) { // Тик или как это ещё можно обозвать?
+	var cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
+	var cY = e.layerY;
 
 	move(cX, cY); // Сразу же лвигаем персонажа
-	let tmp = searchPlayer();
+	var tmp = searchPlayer();
 
 	for(let i in triggers){ // Перебераем триггеры локаций
-		if( collision({x: tmp[0], y: tmp[1]}, triggers[i][0]) && room==triggers[i][1] && collision({x: Math.floor(cX/size), y: Math.floor(cY/size)}, triggers[i][0])){
+		if( pointInObj({x: tmp[0], y: tmp[1]}, triggers[i][0]) && room==triggers[i][1] && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, triggers[i][0])){
 			room=triggers[i][2]; // Устанавливаем нужную локацию
 			break;
 		}
 	}
 	for(let i in npc){ // Перебераем NPC
-		if( room==npc[i][0] && collision({x: tmp[0], y: tmp[1]}, npc[i][1]) && collision({x: Math.floor(cX/size), y: Math.floor(cY/size)}, npc[i][2])){
+		if( room==npc[i][0] && pointInObj({x: tmp[0], y: tmp[1]}, npc[i][1]) && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, npc[i][2])){
 			NPC(npc[i][3], tmp); // Вызываем функцию
 			break;
 		}
@@ -121,20 +125,21 @@ var startGame = function(){ // Функция запуска игры
 	if (_class==5) player.hp=0;
 
 	drawMap(); // И рисуем в который раз карту...
+	runGui();
 }
 
 
 
-let bot = function() {
+var bot = function() {
 	for(let i in bots){
 		if(bots[i][0]==room){
-			let x = (randomInt(1)==1)?bots[i][1].x-1:bots[i][1].x+1;
-			let y = (randomInt(1)==1)?bots[i][1].y-1:bots[i][1].y+1;
+			var x = (randomInt(1)==1)?bots[i][1].x-1:bots[i][1].x+1;
+			var y = (randomInt(1)==1)?bots[i][1].y-1:bots[i][1].y+1;
 
-			let botPos = bots[i][1];
-			let plyPos = searchPlayer();
+			var botPos = bots[i][1];
+			var plyPos = searchPlayer();
 
-			if(collision({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
+			if(pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
 				player.hp-=25;
 				return;
 			}
@@ -147,14 +152,12 @@ let bot = function() {
 			} else if (canGoBot(botPos, x, botPos.y)) {
 				bots[i][1].x=x;
 			}
-
-
 		}
 	}
 }
 
 
-let NPC = function(id, oldPos) { // Обработка ботов. Тут без комментариев
+var NPC = function(id, oldPos) { // Обработка ботов. Тут без комментариев
 	playerPos[room]={x:oldPos[0],y:oldPos[1]};
 	switch(id){
 		case 0:
@@ -164,9 +167,8 @@ let NPC = function(id, oldPos) { // Обработка ботов. Тут без
 }
 
 // Далее идут какие-то функции. Я бы сказал вспомогательные, но с ними возишься дольше.
-let canGo = function(x, y) { // Особенно с этой
-	let pos = searchPlayer(); // Находим персонажа
-	console.log(x,y);
+var canGo = function(x, y) { // Особенно с этой
+	var pos = searchPlayer(); // Находим персонажа
 
 	if(x==pos[0] && y==pos[1]){return false;} // Не переместиться в себя
 	for(let i in npc){
@@ -187,7 +189,7 @@ let canGo = function(x, y) { // Особенно с этой
 
 	return false; // Ну и если всё пошло не так, то ходить нельзя.
 }
-let canGoBot = function(pos, x, y) {
+var canGoBot = function(pos, x, y) {
 	if (x<0||x>7||y<0||y>7) {return false;}
 	if (x==playerPos[room].x&&y==playerPos[room].y) {return false;}
 
@@ -206,7 +208,7 @@ let canGoBot = function(pos, x, y) {
 	return false; // Ну и если всё пошло не так, то ходить нельзя.
 }
 
-let drawMap = function() { // Отрисовка карты
+var drawMap = function() { // Отрисовка карты
 	for(let y in map[room]) {
 		for(let x in map[room][y]){
 			idMap[0].img.draw(game_cnv, x*size, y*size, size, size);
@@ -227,14 +229,21 @@ let drawMap = function() { // Отрисовка карты
 	idMap[1].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
 }
 
-let searchPlayer = function() { // Поиск персонажа.
+var searchPlayer = function() { // Поиск персонажа.
 	return [playerPos[room].x, playerPos[room].y]
 }
 
-let move = function(cX, cY) { // Ну а это движение (неожиданно, да?)
+var move = function(cX, cY) { // Ну а это движение (неожиданно, да?)
+	var pos = searchPlayer();
+
+	if (Math.floor(cX/64)==pos[0] && Math.floor(cY/64)==pos[1]) {
+		inv=!inv;
+		updInvOpen();
+	}
+
 	for(let y in map[room]) { // Перебираем карту
 		for(let x in map[room][y]){
-			if( collision({x: cX, y: cY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
+			if( pointInObj({x: cX, y: cY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
 				if(canGo(x, y)){ // И если может двигаться
 					// И двигаем
 					playerPos[room]={x:x,y:y};

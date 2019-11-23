@@ -69,9 +69,6 @@ sprite.prototype.draw = function(cnv) {
 	ctx.fillRect(this.x, this.y, this.image.width, this.image.height);
 	ctx.drawImage(this.image, this.x, this.y);
 };
-sprite.prototype.setSRC = function(src) {
-	this.image.src = "./images/"+src;
-};
 
 var clear = function(cnv) {
 	let ctx = cnv.getContext('2d');
@@ -85,12 +82,12 @@ var text = function(cnv, text, x, y, color, font) { // To delete
 	ctx.fillText(text, x, y);
 }
 
-var generateRect = function(obj) {
+var tmpRect = function(obj) {
 	return {x: obj.x, y: obj.y, w: obj.width || obj.image.width, h: obj.height || obj.image.height}
 }
 
-var collision = function(mouse, object) { // mouse = {x, y} object = {x, y, w, h}
-	return (mouse.x>=object.x && mouse.y>=object.y && mouse.x<=object.w+object.x && mouse.y<=object.h+object.y);
+var pointInObj = function(point, object) { // point = {x, y} object = {x, y, w, h}
+	return (point.x>=object.x && point.y>=object.y && point.x<=object.w+object.x && point.y<=object.h+object.y);
 }
 
 var array_move = function(arr, old_index, new_index) {
@@ -107,6 +104,3 @@ var array_move = function(arr, old_index, new_index) {
 var randomInt = function(max) {
 	return Math.round(Math.random()*max);
 }
-
-var doc = document;
-var getId = "getElementById";
