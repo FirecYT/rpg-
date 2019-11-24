@@ -2,7 +2,7 @@
 
 let start = [new rect(0, 0, 512, 512, "#666"), new sprite("titleStart.png", 0, 0, "#333")] // Фон и полоска сверху
 let classes = [ // Иконки классов
-	new sprite("mag.png", 32, 64, "#777", "#575", "#7A7"),
+	new sprite("Mag.png", 32, 64, "#777", "#575", "#7A7"),
 	new sprite("lock.png", 192, 64, "#700"),
 	new sprite("lock.png", 352, 64, "#700"),
 	new sprite("lock.png", 32, 224, "#700"),
