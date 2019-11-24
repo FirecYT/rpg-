@@ -38,7 +38,9 @@ var title = function (src, x, y, width, height) {
 }
 title.prototype.draw = function(cnv, x, y, width, height) {
 	let ctx = cnv.getContext('2d');
-	ctx.drawImage(this.image, this.x, this.y, this.width, this.height, x, y, width, height);
+	if(this.image.complete) {
+		ctx.drawImage(this.image, this.x, this.y, this.width, this.height, x, y, width, height);
+	}
 };
 
 var sprite = function (src, x, y, colorConst, colorActive, colorClicked) {
@@ -66,8 +68,10 @@ sprite.prototype.draw = function(cnv) {
 			ctx.fillStyle = this.colorClicked;
 			break;
 	}
-	ctx.fillRect(this.x, this.y, this.image.width, this.image.height);
-	ctx.drawImage(this.image, this.x, this.y);
+	if(this.image.complete){
+		ctx.fillRect(this.x, this.y, this.image.width, this.image.height);
+		ctx.drawImage(this.image, this.x, this.y);
+	}
 };
 
 var clear = function(cnv) {

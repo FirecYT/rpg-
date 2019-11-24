@@ -68,12 +68,12 @@ var playerPos = [ // Позиции играка для каждой локац�
 
 
 var _classes_pref = [
-	{hp: 25,mp: 0,exp: 0,lvl: 0},
-	{hp: 100,mp: 0,exp: 0,lvl: 0},
-	{hp: 100,mp: 0,exp: 0,lvl: 0},
-	{hp: 100,mp: 0,exp: 0,lvl: 0},
-	{hp: 9999,mp: 9999,exp: 9999,lvl: 9999},
-	{hp: 0,mp: 0,exp: 999,lvl: 9999}
+	{maxHp:100, hp: 25,mp: 0,exp: 0,lvl: 0},
+	{maxHp:100, hp: 100,mp: 0,exp: 0,lvl: 0},
+	{maxHp:100, hp: 100,mp: 0,exp: 0,lvl: 0},
+	{maxHp:100, hp: 100,mp: 0,exp: 0,lvl: 0},
+	{maxHp:100, hp: 9999,mp: 9999,exp: 9999,lvl: 9999},
+	{maxHp:100, hp: 0,mp: 0,exp: 999,lvl: 9999}
 ]
 
 var player;

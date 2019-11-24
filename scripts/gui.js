@@ -2,8 +2,8 @@
 
 var inv = false;
 var updInvOpen;
-var runGui = function() {
 
+var runGui = function() {
 	var bg = new rect(0, 0, 512, 512, "#555"); // Задний фон
 	var tabs = [ // Вкладки
 		new sprite("invMenuStatus.png", 0, 480, "#333")
@@ -33,7 +33,7 @@ var runGui = function() {
 					inv=0;
 						showInv();
 				} else {
-					game_cnv.style["filter"]="grayscale("+ +( (_classes_pref[_class].hp || 100)-player.hp)/2+"%)";
+					game_cnv.style["filter"]="grayscale("+ +( (player.maxHp || 100)-player.hp)/2+"%)";
 					game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
 					
 					text(gui_cnv,"HP: "+player.hp,32,32+32,"#AAA","32px Pixel Cyr, monospace");
@@ -85,4 +85,5 @@ var runGui = function() {
 
 	setInterval(drawInv, 10);
 	drawInv();
+	hideInv();
 }
