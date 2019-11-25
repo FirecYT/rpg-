@@ -575,6 +575,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/даниил/Documents/.FIREC/public_html/BOTS/MrSpiel/index.php",
 		"/C/Users/даниил/Documents/.FIREC/RPG/scripts/gui.js",
 		"/C/Users/даниил/Documents/.FIREC/RPG/style.css",
 		"/C/Users/даниил/Documents/.FIREC/RPG/game.js",
@@ -755,7 +756,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -887,8 +888,8 @@
 						"selection":
 						[
 							[
-								2676,
-								2676
+								312,
+								312
 							]
 						],
 						"settings":
@@ -949,7 +950,7 @@
 						"translation.y": 733.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -978,7 +979,7 @@
 						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1006,7 +1007,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

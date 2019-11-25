@@ -1,72 +1,5 @@
 ﻿'use strict';
 
-var map = [ // Создаём массив с картами (пробелы нужны на будущие, так как мне кажется, что текстур будет больше, чем 10 [0-9] )
-	[	[0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0, 0, 0, 0],
-		[0, 0, 4, 4, 4, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 3, 4, 3, 0, 0, 0, 0]],
-
-	[	[0, 3, 4, 3, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 0],
-		[0, 0, 4, 0, 0, 0, 0, 3],
-		[0, 0, 4, 4, 4, 4, 4, 4],
-		[0, 0, 0, 0, 0, 0, 0, 3],
-		[0, 0, 0, 0, 0, 0, 0, 0]],
-
-	[	[0, 0, 2, 2, 2, 2, 2, 0],
-		[0, 0, 2, 5, 5, 5, 2, 0],
-		[0, 0, 2, 5, 5, 5, 2, 0],
-		[0, 0, 2, 5, 5, 5, 2, 0],
-		[3, 0, 2, 2, 5, 2, 2, 0],
-		[4, 4, 4, 4, 4, 0, 0, 0],
-		[3, 0, 0, 0, 4, 0, 0, 0],
-		[0, 0, 0, 0, 4, 0, 0, 0]]
-]
-var idMap = [ // Массив с idMap объектов на карте
-/* 0. Пол. Скин: асфальт */		{solid: 0, img: new title("title.png",0,0)},
-/* 1. Игрок */					{solid: 1, img: new title("title.png",16,0)},
-/* 2. Ящик */					{solid: 1, img: new title("title.png",0,16)},
-/* 3. NPC */					{solid: 1, img: new title("title.png",16,0)},
-/* 4. Пол. Скин: дорога. */		{solid: 0, img: new title("title.png",0,32)},
-/* 5. Пол. Скин: дом */			{solid: 0, img: new title("title.png",16,32)},
-/* 6. BOT1 */					{solid: 1, img: new title("title.png",16,16)}
-]
-
-var size = 64; // Размер спрайтов.
-var room = 0; // Текущая локация
-
-var triggers = [ // Массив триггеров
-	[{x:2,y:7,w:0,h:0}, 0, 1,'x'], // С нулевой локации на первую
-	[{x:2,y:0,w:0,h:0}, 1, 0,'x'], // С первой на нулевую
-	[{x:7,y:5,w:0,h:0}, 1, 2,'y'], // С первой на вторую
-	[{x:0,y:5,w:0,h:0}, 2, 1,'y'] // Со второй на первую
-]
-
-var npc = [ // Массив NPC
-	//[room, trigger, posNPC, id]
-	[2, {x:3,y:1,w:2,h:1}, {x:4,y:1,w:0,h:0}, 0]
-]
-
-var bots = [ // Массив ботов
-	//[room, posBOT]
-	[0, {x:2,y:3}],
-	[1, {x:2,y:5}],
-	[2, {x:4,y:5}]
-]
-
-var playerPos = [ // Позиции играка для каждой локации.
-	{x:4,y:3},
-	{x:2,y:0},
-	{x:0,y:5}
-]
-
-
 var _classes_pref = [
 	{maxHp:100, hp: 25,mp: 0,exp: 0,lvl: 0},
 	{maxHp:100, hp: 100,mp: 0,exp: 0,lvl: 0},
@@ -84,16 +17,16 @@ var realTick = function() {
 }
 
 
-var fakeTick = function(e) { // Тик или как это ещё можно обозвать?
-	var cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
-	var cY = e.layerY;
+var clickEvent = function(e) { // Тик или как это ещё можно обозвать?
+	let cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
+	let cY = e.layerY;
 
 	move(cX, cY); // Сразу же лвигаем персонажа
-	var tmp = searchPlayer();
+	let tmp = searchPlayer();
 
-	for(let i in triggers){ // Перебераем триггеры локаций
-		if( pointInObj({x: tmp[0], y: tmp[1]}, triggers[i][0]) && room==triggers[i][1] && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, triggers[i][0])){
-			room=triggers[i][2]; // Устанавливаем нужную локацию
+	for(let i in mapChangers){ // Перебераем триггеры локаций
+		if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0]) && room==mapChangers[i][1] && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, mapChangers[i][0])){
+			room=mapChangers[i][2]; // Устанавливаем нужную локацию
 			break;
 		}
 	}
@@ -108,21 +41,17 @@ var fakeTick = function(e) { // Тик или как это ещё можно о
 }
 
 var startGame = function(){ // Функция запуска игры
-	game_cnv.removeEventListener("mouseup", mouseup); // Удаляем все слушатели
-	game_cnv.removeEventListener("mousemove", mousemove);
-	game_cnv.addEventListener("mouseup", fakeTick); // Добавляем новый
+	game_cnv.addEventListener("mouseup", clickEvent); // Добавляем новый
 
 	for(let n in map) { // Ну и тут случайно генерируются бочки
 		for(let y in map[n]) {
 			for(let x in map[n][y]){
 				if (map[n][y][x]==0) {
-					if (randomInt(100)<=15) map[n][y][x]=2; // Случайное число берём [0, 100] и если оно меньше 15, то будет бочка
+					if (randomInt(100)<=15) map[n][y][x]=1; // Случайное число берём [0, 100] и если оно меньше 15, то будет бочка
 				}
 			}
 		}
 	}
-
-	if (_class==5) player.hp=0;
 
 	drawMap(); // И рисуем в который раз карту...
 	runGui();
@@ -133,11 +62,11 @@ var startGame = function(){ // Функция запуска игры
 var bot = function() {
 	for(let i in bots){
 		if(bots[i][0]==room){
-			var x = (randomInt(1)==1)?bots[i][1].x-1:bots[i][1].x+1;
-			var y = (randomInt(1)==1)?bots[i][1].y-1:bots[i][1].y+1;
+			let x = (randomInt(1)==1)?bots[i][1].x-1:bots[i][1].x+1;
+			let y = (randomInt(1)==1)?bots[i][1].y-1:bots[i][1].y+1;
 
-			var botPos = bots[i][1];
-			var plyPos = searchPlayer();
+			let botPos = bots[i][1];
+			let plyPos = searchPlayer();
 
 			if(pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
 				player.hp-=25;
@@ -168,7 +97,7 @@ var NPC = function(id, oldPos) { // Обработка ботов. Тут без
 
 // Далее идут какие-то функции. Я бы сказал вспомогательные, но с ними возишься дольше.
 var canGo = function(x, y) { // Особенно с этой
-	var pos = searchPlayer(); // Находим персонажа
+	let pos = searchPlayer(); // Находим персонажа
 
 	if(x==pos[0] && y==pos[1]){return false;} // Не переместиться в себя
 	for(let i in npc){
@@ -177,10 +106,10 @@ var canGo = function(x, y) { // Особенно с этой
 	for(let i in bots){
 		if(bots[i][0]==room && x==bots[i][1].x && y==bots[i][1].y){return false;} // Не переместиться в бота
 	}
-	if(idMap[map[room][y][x]].solid){return false;} // Не переместиться в стенку
+	if(mapTextures[map[room][y][x]].solid){return false;} // Не переместиться в стенку
 
 	if( Math.abs(x-pos[0]) + Math.abs(y-pos[1]) == 2) { // Если ходит по диагонали
-		if(map[room][pos[1]][(+pos[0]+ +(x-pos[0]))]==2 && map[room][(+pos[1]+ +(y-pos[1]))][pos[0]]==2){ // И ему мещают ящики
+		if(mapTextures[map[room][pos[1]][(+pos[0]+ +(x-pos[0]))]].solid && mapTextures[map[room][(+pos[1]+ +(y-pos[1]))][pos[0]]].solid){ // И ему мещают ящики
 			return false; // То он не идёт никуда
 		}
 	}
@@ -201,7 +130,7 @@ var canGoBot = function(pos, x, y) {
 		if(x==bots[i][1].x && y==bots[i][1].y){return false;} // Не переместиться в бота
 	}
 
-	if(idMap[map[room][y][x]].solid){return false;} // Не переместиться в стенку
+	if(mapTextures[map[room][y][x]].solid){return false;} // Не переместиться в стенку
 
 	if( Math.abs(x-pos.x) <= 1 && Math.abs(y-pos.y) <= 1) return true; // А если рядом, то пусть идёт
 
@@ -211,22 +140,22 @@ var canGoBot = function(pos, x, y) {
 var drawMap = function() { // Отрисовка карты
 	for(let y in map[room]) {
 		for(let x in map[room][y]){
-			idMap[0].img.draw(game_cnv, x*size, y*size, size, size);
-			idMap[map[room][y][x]].img.draw(game_cnv, x*size, y*size, size, size);
+			mapTextures[0].img.draw(game_cnv, x*size, y*size, size, size);
+			mapTextures[map[room][y][x]].img.draw(game_cnv, x*size, y*size, size, size);
 		}
 	}
 	
 	for(let i in npc){
-		if(npc[i][0]==room) idMap[3].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
+		if(npc[i][0]==room) enemyTextures[1].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
 	}
 
 	for(let i in bots){
 		if (bots[i][0]==room) {
-			idMap[6].img.draw(game_cnv, bots[i][1].x*size, bots[i][1].y*size, size, size);
+			enemyTextures[2].img.draw(game_cnv, bots[i][1].x*size, bots[i][1].y*size, size, size);
 		}
 	}
 	
-	idMap[1].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
+	enemyTextures[0].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
 }
 
 var searchPlayer = function() { // Поиск персонажа.
@@ -234,7 +163,7 @@ var searchPlayer = function() { // Поиск персонажа.
 }
 
 var move = function(cX, cY) { // Ну а это движение (неожиданно, да?)
-	var pos = searchPlayer();
+	let pos = searchPlayer();
 
 	if (Math.floor(cX/64)==pos[0] && Math.floor(cY/64)==pos[1]) {
 		inv=!inv;

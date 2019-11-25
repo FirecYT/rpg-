@@ -6,7 +6,8 @@ var updInvOpen;
 var runGui = function() {
 	var bg = new rect(0, 0, 512, 512, "#555"); // Задний фон
 	var tabs = [ // Вкладки
-		new sprite("invMenuStatus.png", 0, 480, "#333")
+		new sprite("guiInfo.png", 0, 480, "#333"),
+		new sprite("guiInv.png", 84, 480, "#333")
 	]
 	var tab = 0; // Открытая вкладка
 
@@ -29,7 +30,7 @@ var runGui = function() {
 					game_cnv.style["filter"]="grayscale(100%) blur(2px)";
 					game_cnv.style["-webkit-filter"]="grayscale(100%), blur(3px)";
 
-					game_cnv.removeEventListener("mouseup", fakeTick);
+					game_cnv.removeEventListener("mouseup", clickEvent);
 					inv=0;
 						showInv();
 				} else {
@@ -60,8 +61,8 @@ var runGui = function() {
 	}
 
 	var InvEvent = function(e) {
-		var cX = e.layerX; // Я индус
-		var cY = e.layerY;
+		let cX = e.layerX; // Я индус
+		let cY = e.layerY;
 
 		if(pointInObj({x: cX, y: cY}, tmpRect(invClose))){
 			inv=!inv;
