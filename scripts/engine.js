@@ -108,3 +108,7 @@ var array_move = function(arr, old_index, new_index) {
 var randomInt = function(max) {
 	return Math.round(Math.random()*max);
 }
+
+var clickPos = function(e,cnv) {
+	return {x: Math.round(e.layerX/cnv.getBoundingClientRect().width*cnv.width), y: Math.round(e.layerY/cnv.getBoundingClientRect().height*cnv.height)}
+}

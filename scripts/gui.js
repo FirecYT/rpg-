@@ -61,8 +61,8 @@ var runGui = function() {
 	}
 
 	var InvEvent = function(e) {
-		let cX = e.layerX; // Я индус
-		let cY = e.layerY;
+		let cX = clickPos(e, gui_cnv).x; // Я индус
+		let cY = clickPos(e, gui_cnv).y;
 
 		if(pointInObj({x: cX, y: cY}, tmpRect(invClose))){
 			inv=!inv;
@@ -73,15 +73,37 @@ var runGui = function() {
 	gui_cnv.addEventListener("mouseup", InvEvent);
 
 	var showInv = function() {
-		game_cnv.style.width="0px";
-		gui_cnv.style.margin="-256px 0 0 -256px";
-		gui_cnv.style.width="512px";
+		let canWidth = window.matchMedia("(min-width: 512px)").matches;
+		let canHeight = window.matchMedia("(min-height: 512px)").matches;
+
+		if (canWidth && canHeight){
+			gui_cnv.style.margin="-256px 0 0 -256px";
+			gui_cnv.style.width="512px";
+			game_cnv.style.width="0px";
+		} else if (!canWidth && canHeight) {
+			gui_cnv.style.width="100%";
+			game_cnv.style.width="0px";
+		} else if (canWidth && !canHeight) {
+			gui_cnv.style.height="100%";
+			game_cnv.style.height="0px";
+		}
 	}
 
 	var hideInv = function() {
-		game_cnv.style.width="512px";
-		gui_cnv.style.margin="-256px 0 0 256px";
-		gui_cnv.style.width="0px";
+		let canWidth = window.matchMedia("(min-width: 512px)").matches;
+		let canHeight = window.matchMedia("(min-height: 512px)").matches;
+
+		if (canWidth && canHeight){
+			gui_cnv.style.margin="-256px 0 0 256px";
+			gui_cnv.style.width="0px";
+			game_cnv.style.width="512px";
+		} else if (!canWidth && canHeight) {
+			gui_cnv.style.width="0px";
+			game_cnv.style.width="100%";
+		} else if (canWidth && !canHeight) {
+			gui_cnv.style.height="0px";
+			game_cnv.style.height="100%";
+		}
 	}
 
 	setInterval(drawInv, 10);

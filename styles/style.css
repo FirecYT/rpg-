@@ -31,3 +31,39 @@ canvas {
 	height: 512px;
 	margin: -256px 0 0 256px;
 }
+
+@media screen and (max-width: 512px) {
+	canvas {
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		margin: 0;
+	}
+	#game {
+		width: 100%;
+		height: auto;
+	}
+	#gui {
+		width: 0px;
+		height: auto;
+		margin: 0;
+	}
+}
+
+@media screen and (max-height: 512px) {
+	canvas {
+		top: 0%;
+		left: 0%;
+		height: 100%;
+		margin: 0;
+	}
+	#game {
+		width: auto;
+		height: 100%;
+	}
+	#gui {
+		width: auto;
+		height: 0px;
+		margin: 0;
+	}
+}

@@ -18,8 +18,8 @@ var realTick = function() {
 
 
 var clickEvent = function(e) { // Тик или как это ещё можно обозвать?
-	let cX = e.layerX; // Я не индус, буду делать... А-а-а!!!
-	let cY = e.layerY;
+	let cX = clickPos(e, game_cnv).x; // Я не индус, буду делать... А-а-а!!!
+	let cY = clickPos(e, game_cnv).y;
 
 	move(cX, cY); // Сразу же лвигаем персонажа
 	let tmp = searchPlayer();
