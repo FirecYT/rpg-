@@ -70,7 +70,15 @@ var runGui = function() {
 		}
 	}
 
+	var keyEvent = function(e) {
+		if(e.keyCode==32){
+			inv=!inv;
+			updInvOpen();
+		}
+	}
+
 	gui_cnv.addEventListener("mouseup", InvEvent);
+	document.addEventListener("keyup", keyEvent);
 
 	var showInv = function() {
 		let canWidth = window.matchMedia("(min-width: 512px)").matches;

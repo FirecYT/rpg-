@@ -11,6 +11,8 @@ var _classes_pref = [
 
 var player;
 
+var oldPlayerPos = [];
+
 
 var realTick = function() {
 	bot();
@@ -18,20 +20,19 @@ var realTick = function() {
 
 
 var clickEvent = function(e) { // Тик или как это ещё можно обозвать?
-	let cX = clickPos(e, game_cnv).x; // Я не индус, буду делать... А-а-а!!!
-	let cY = clickPos(e, game_cnv).y;
+	let cPos = clickPos(e, game_cnv); // Я не индус, буду делать... А-а-а!!!
 
-	move(cX, cY); // Сразу же лвигаем персонажа
+	move(cPos.x, cPos.y); // Сразу же лвигаем персонажа
 	let tmp = searchPlayer();
 
 	for(let i in mapChangers){ // Перебераем триггеры локаций
-		if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0]) && room==mapChangers[i][1] && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, mapChangers[i][0])){
+		if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0]) && room==mapChangers[i][1] && pointInObj({x: Math.floor(cPos.x/size), y: Math.floor(cPos.y/size)}, mapChangers[i][0])){
 			room=mapChangers[i][2]; // Устанавливаем нужную локацию
 			break;
 		}
 	}
 	for(let i in npc){ // Перебераем NPC
-		if( room==npc[i][0] && pointInObj({x: tmp[0], y: tmp[1]}, npc[i][1]) && pointInObj({x: Math.floor(cX/size), y: Math.floor(cY/size)}, npc[i][2])){
+		if( room==npc[i][0] && pointInObj({x: tmp[0], y: tmp[1]}, npc[i][1]) && pointInObj({x: Math.floor(cPos.x/size), y: Math.floor(cPos.y/size)}, npc[i][2])){
 			NPC(npc[i][3], tmp); // Вызываем функцию
 			break;
 		}
@@ -40,8 +41,31 @@ var clickEvent = function(e) { // Тик или как это ещё можно 
 	drawMap(); // Рисуем карту
 }
 
+var keyEvent = function(e) { // Тик или как это ещё можно обозвать?
+	let tmpKey = searchPlayer();
+	switch(e.keyCode){
+		case 37: // Arrow left
+		case 65: // A
+			clickEvent({layerX: tmpKey[0]*size+size/2-size,			layerY: tmpKey[1]*size+size/2})
+		break;
+		case 38: // Arrow up
+		case 87: // W
+			clickEvent({layerX: tmpKey[0]*size+size/2,				layerY: tmpKey[1]*size+size/2-size})
+		break;
+		case 39: // Arrow right
+		case 68: // D
+			clickEvent({layerX: tmpKey[0]*size+size/2+size,			layerY: tmpKey[1]*size+size/2})
+		break;
+		case 40: // Arrow down
+		case 83: // S
+			clickEvent({layerX: tmpKey[0]*size+size/2,				layerY: tmpKey[1]*size+size/2+size})
+		break;
+	}
+}
+
 var startGame = function(){ // Функция запуска игры
 	game_cnv.addEventListener("mouseup", clickEvent); // Добавляем новый
+	document.addEventListener("keyup", keyEvent); // Добавляем новый
 
 	for(let n in map) { // Ну и тут случайно генерируются бочки
 		for(let y in map[n]) {
@@ -154,6 +178,11 @@ var drawMap = function() { // Отрисовка карты
 			enemyTextures[2].img.draw(game_cnv, bots[i][1].x*size, bots[i][1].y*size, size, size);
 		}
 	}
+
+	let oldPosSize = 16;
+	for(let i in oldPlayerPos){
+		new rect(oldPlayerPos[i].x*size+oldPosSize*1.5,oldPlayerPos[i].y*size+oldPosSize*1.5,oldPosSize,oldPosSize,"rgba(0,127,0,"+(0.4-(0.1*i))+")").draw(game_cnv);
+	}
 	
 	enemyTextures[0].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
 }
@@ -162,19 +191,22 @@ var searchPlayer = function() { // Поиск персонажа.
 	return [playerPos[room].x, playerPos[room].y]
 }
 
-var move = function(cX, cY) { // Ну а это движение (неожиданно, да?)
+var move = function(goX, goY) { // Ну а это движение (неожиданно, да?)
 	let pos = searchPlayer();
 
-	if (Math.floor(cX/64)==pos[0] && Math.floor(cY/64)==pos[1]) {
+	if (Math.floor(goX/64)==pos[0] && Math.floor(goY/64)==pos[1]) {
 		inv=!inv;
 		updInvOpen();
 	}
 
 	for(let y in map[room]) { // Перебираем карту
 		for(let x in map[room][y]){
-			if( pointInObj({x: cX, y: cY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
+			if( pointInObj({x: goX, y: goY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
 				if(canGo(x, y)){ // И если может двигаться
 					// И двигаем
+					oldPlayerPos.unshift({x: pos[0], y: pos[1]});
+					if(oldPlayerPos.length>4)
+						oldPlayerPos.pop();
 					playerPos[room]={x:x,y:y};
 					realTick();
 				}
