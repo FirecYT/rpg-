@@ -55,7 +55,6 @@ var enemyTextures = [
 ]
 
 var size = 64; // Размер спрайтов.
-var room = 0; // Текущая локация
 
 var mapChangers = [ // Массив переходов
 	[{x:2,y:7,w:0,h:0}, 0, 1,'x'], // С нулевой локации на первую
@@ -100,5 +99,5 @@ var playerPos = [ // Позиции играка для каждой локац�
 ]
 
 var searchPlayer = function() { // Поиск персонажа.
-	return [playerPos[room].x, playerPos[room].y]
+	return [playerPos[player.room].x, playerPos[player.room].y]
 }

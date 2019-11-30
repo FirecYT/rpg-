@@ -26,19 +26,19 @@ var game = {
 		ai();
 	},
 	draw_map: () => {
-		for(let y in map[room]) {
-			for(let x in map[room][y]){
+		for(let y in map[player.room]) {
+			for(let x in map[player.room][y]){
 				mapTextures[0].img.draw(game_cnv, x*size, y*size, size, size);
-				mapTextures[map[room][y][x]].img.draw(game_cnv, x*size, y*size, size, size);
+				mapTextures[map[player.room][y][x]].img.draw(game_cnv, x*size, y*size, size, size);
 			}
 		}
 		
 		for(let i in npc){
-			if(npc[i][0]==room) enemyTextures[1].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
+			if(npc[i][0]==player.room) enemyTextures[1].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
 		}
 
 		for(let i in angryBots){
-			if (angryBots[i].room==room) {
+			if (angryBots[i].room==player.room) {
 				enemyTextures[2].img.draw(game_cnv, angryBots[i].pos.x*size, angryBots[i].pos.y*size, size, size);
 			}
 		}
@@ -49,7 +49,7 @@ var game = {
 			new rect(player.old_positions[i].x*size+oldPosSize*1.5,player.old_positions[i].y*size+oldPosSize*1.5,oldPosSize,oldPosSize,"rgba(0,127,0,"+(0.4-(0.1*i))+")").draw(game_cnv);
 		}
 
-		enemyTextures[0].img.draw(game_cnv, playerPos[room].x*size, playerPos[room].y*size, size, size);
+		enemyTextures[0].img.draw(game_cnv, playerPos[player.room].x*size, playerPos[player.room].y*size, size, size);
 	},
 	NPC: (id) => {
 		switch(id){
@@ -65,14 +65,8 @@ var game = {
 		player.move(cPos.x, cPos.y); // Сразу же лвигаем персонажа
 		let tmp = searchPlayer();
 
-		for(let i in mapChangers){ // Перебераем триггеры локаций
-			if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0]) && room==mapChangers[i][1] && pointInObj({x: Math.floor(cPos.x/size), y: Math.floor(cPos.y/size)}, mapChangers[i][0])){
-				room=mapChangers[i][2]; // Устанавливаем нужную локацию
-				break;
-			}
-		}
 		for(let i in npc){ // Перебераем NPC
-			if( room==npc[i][0] && pointInObj({x: tmp[0], y: tmp[1]}, npc[i][1]) && pointInObj({x: Math.floor(cPos.x/size), y: Math.floor(cPos.y/size)}, npc[i][2])){
+			if( player.room==npc[i][0] && pointInObj({x: tmp[0], y: tmp[1]}, npc[i][1]) && pointInObj({x: Math.floor(cPos.x/size), y: Math.floor(cPos.y/size)}, npc[i][2])){
 				game.NPC(npc[i][3], tmp); // Вызываем функцию
 				break;
 			}
@@ -124,15 +118,15 @@ var player = {
 
 			if(x==pos[0] && y==pos[1]){return false;} // Не переместиться в себя
 			for(let i in npc){
-				if(npc[i][0]==room && x==npc[i][2].x && y==npc[i][2].y){return false;} // Не переместиться в NPC
+				if(npc[i][0]==player.room && x==npc[i][2].x && y==npc[i][2].y){return false;} // Не переместиться в NPC
 			}
 			for(let i in angryBots){
-				if(angryBots[i][0]==room && x==angryBots[i][1].x && y==angryBots[i][1].y){return false;} // Не переместиться в бота
+				if(angryBots[i][0]==player.room && x==angryBots[i][1].x && y==angryBots[i][1].y){return false;} // Не переместиться в бота
 			}
-			if(mapTextures[map[room][y][x]].solid){return false;} // Не переместиться в стенку
+			if(mapTextures[map[player.room][y][x]].solid){return false;} // Не переместиться в стенку
 
 			if( Math.abs(x-pos[0]) + Math.abs(y-pos[1]) == 2) { // Если ходит по диагонали
-				if(mapTextures[map[room][pos[1]][(+pos[0]+ +(x-pos[0]))]].solid && mapTextures[map[room][(+pos[1]+ +(y-pos[1]))][pos[0]]].solid){ // И ему мещают ящики
+				if(mapTextures[map[player.room][pos[1]][(+pos[0]+ +(x-pos[0]))]].solid && mapTextures[map[player.room][(+pos[1]+ +(y-pos[1]))][pos[0]]].solid){ // И ему мещают ящики
 					return false; // То он не идёт никуда
 				}
 			}
@@ -149,15 +143,15 @@ var player = {
 			inv.upd();
 		}
 
-		for(let y in map[room]) { // Перебираем карту
-			for(let x in map[room][y]){
+		for(let y in map[player.room]) { // Перебираем карту
+			for(let x in map[player.room][y]){
 				if( pointInObj({x: goX, y: goY}, {x:x*size,y:y*size,w:size,h:size}) ){ // Если мышька пересикается с одной из клеток
 					if(player.can_go(x, y)){ // И если может двигаться
 						// И двигаем
 						player.old_positions.unshift({x: pos[0], y: pos[1]});
 						if(player.old_positions.length>4)
 							player.old_positions.pop();
-						playerPos[room]={x:x,y:y};
+						playerPos[player.room]={x:x,y:y};
 						game.tick();
 					}
 				}

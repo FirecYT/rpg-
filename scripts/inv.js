@@ -3,15 +3,31 @@
 var inv = {
 	open: false,
 	background: new rect(0, 0, 512, 512, "#555"),
-	now_tab: 0,
+	now_tab: 2,
 	up_panel: new rect(0, 0, 512, 32, "#333"),
 	close_btn: new rect(480, 0, 32, 32, "#700"),
 	tabs_icon: [
 		new sprite("guiInfo.png", 0, 480, "#333"),
-		new sprite("guiInv.png", 84, 480, "#333")
+		new sprite("guiInv.png", 84, 480, "#333"),
+		new sprite("guiInteraction.png", 145, 480, "#333"),
+	],
+	interaction_panel: [
+		new rect(32, 64+8, 32, 32, "#7A7", "#A77")
 	],
 
 	draw: () => {
+		if(player.params.hp<=0){
+			game_cnv.style["filter"]="grayscale(100%) blur(2px)";
+			game_cnv.style["-webkit-filter"]="grayscale(100%), blur(3px)";
+
+			game_cnv.removeEventListener("mouseup", clickEvent);
+			inv.open=0;
+			inv.show();
+		} else {
+			game_cnv.style["filter"]="grayscale("+ +( (player.params.maxHp || 100)-player.params.hp)/2+"%)";
+			game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
+		}
+
 		if(inv.open){
 			inv.background.draw(gui_cnv);
 
@@ -25,23 +41,34 @@ var inv = {
 				case 0:
 					if(player.params.hp<=0){
 						text(gui_cnv,"You die",32,32+32,"#FAA","32px Pixel Cyr, monospace");
-						game_cnv.style["filter"]="grayscale(100%) blur(2px)";
-						game_cnv.style["-webkit-filter"]="grayscale(100%), blur(3px)";
-
-						game_cnv.removeEventListener("mouseup", clickEvent);
-						inv.open=0;
-						inv.show();
 					} else {
-						game_cnv.style["filter"]="grayscale("+ +( (player.params.maxHp || 100)-player.params.hp)/2+"%)";
-						game_cnv.style["-webkit-filter"]="grayscale("+ +(100-player.hp)/2+"%)";
-						
 						text(gui_cnv,"HP: "+player.params.hp,32,32+32,"#AAA","32px Pixel Cyr, monospace");
 						text(gui_cnv,"MP: "+player.params.mp,32,32+64,"#AAA","32px Pixel Cyr, monospace");
 
 						text(gui_cnv,"EXP: "+player.params.exp,32,128+32,"#AAA","32px Pixel Cyr, monospace");
 						text(gui_cnv,"LVL: "+player.params.lvl,32,128+64,"#AAA","32px Pixel Cyr, monospace");
 					}
-					break;
+				break;
+				case 2:
+					let tmp = searchPlayer();
+					inv.interaction_panel[0].active = 1;
+					for(let i in mapChangers){
+						if(player.room==mapChangers[i][1]){
+							if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0])){
+								inv.interaction_panel[0].active = 0;
+								inv.interaction_panel[0].next_loc = mapChangers[i][2];
+								break;
+							}
+						}
+					}
+
+
+
+					for(let i in inv.interaction_panel){
+						inv.interaction_panel[i].draw(gui_cnv);
+					}
+					text(gui_cnv,"Сменить локацию",32,64,"#AAA","32px Pixel Cyr, monospace");
+				break;
 			}
 
 			if(player.game_class==5){
@@ -91,10 +118,29 @@ var inv = {
 	},
 	mouseup_event: e => {
 		let cPos = clickPos(e, gui_cnv);
+		let cOPos = {x: cPos.x, y: cPos.y};
 
-		if(pointInObj({x: cPos.x, y: cPos.y}, tmpRect(inv.close_btn))){
+		if(pointInObj(cOPos, tmpRect(inv.close_btn))){
 			inv.open=!inv.open;
 			inv.upd();
+			return;
+		}
+
+		for(let i in inv.tabs_icon){
+			if(pointInObj(cOPos, tmpRect(inv.tabs_icon[i]))){
+				inv.now_tab = +i;
+			}
+		}
+
+		if(inv.now_tab==2){
+			for(let i in inv.interaction_panel){
+				if(pointInObj(cOPos, tmpRect(inv.interaction_panel[i]))){
+					if(i==0 && inv.interaction_panel[i].active==0){
+						player.room=inv.interaction_panel[i].next_loc; // Устанавливаем нужную локацию
+						game.draw_map();
+					}
+				}
+			}
 		}
 	},
 	keyup_event: e => {

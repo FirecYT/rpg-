@@ -11,7 +11,7 @@ var ai = function() {
 			let nextX = 0;
 			let nextY = 0;
 
-			if(botRoom==room && pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
+			if(botRoom==player.room && pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
 				console.log(1);
 				return;
 			}
@@ -21,7 +21,7 @@ var ai = function() {
 			nextX = (nowPointPos.x==botPos.x)?0:needGoX;
 			nextY = (nowPointPos.y==botPos.y)?0:needGoY;
 
-			if(plyPos[0]==angryBots[i].pos.x+nextX && plyPos[1]==angryBots[i].pos.y+nextY && botRoom==room){
+			if(plyPos[0]==angryBots[i].pos.x+nextX && plyPos[1]==angryBots[i].pos.y+nextY && botRoom==player.room){
 				console.log(1);
 			} else {
 				angryBots[i].lastPos = JSON.stringify(botPos);
@@ -32,7 +32,7 @@ var ai = function() {
 			let x = (randomInt(1)==1)?botPos.x-1:botPos.x+1;
 			let y = (randomInt(1)==1)?botPos.y-1:botPos.y+1;
 
-			if(botRoom==room && pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
+			if(botRoom==player.room && pointInObj({x:plyPos[0], y:plyPos[1]}, {x:botPos.x-1,y:botPos.y-1,w:2,h:2})) {
 				console.log(1);
 				return;
 			}
