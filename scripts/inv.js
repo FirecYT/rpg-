@@ -3,16 +3,34 @@
 var inv = {
 	open: false,
 	background: new rect(0, 0, 512, 512, "#555"),
-	now_tab: 2,
+	now_tab: 1,
 	up_panel: new rect(0, 0, 512, 32, "#333"),
 	close_btn: new rect(480, 0, 32, 32, "#700"),
-	tabs_icon: [
-		new sprite("guiInfo.png", 0, 480, "#333"),
-		new sprite("guiInv.png", 84, 480, "#333"),
-		new sprite("guiInteraction.png", 145, 480, "#333"),
+	tabs: [
+		{
+			icon: new sprite("guiInfo.png", 32, 480, "#333"),
+			use_panel: []
+		},
+		{
+			icon: new sprite("guiInv.png", 32, 480, "#333"),
+			use_panel: []
+		},
+		{
+			icon: new sprite("guiInteraction.png", 32, 480, "#333"),
+			use_panel: [
+				new rect(32, 64+8, 32, 32, "#7A7", "#A77")
+			]
+		},
+		{
+			icon: new sprite("guiSettings.png", 32, 480, "#333"),
+			use_panel: [
+				new rect(32, 64+8, 32, 32, "#7A7", "#A77")
+			]
+		}
 	],
-	interaction_panel: [
-		new rect(32, 64+8, 32, 32, "#7A7", "#A77")
+	tabs_arrows: [
+		new sprite("leftArrow.png", 0, 480, "#333"),
+		new sprite("rightArrow.png", 480, 480, "#333"),
 	],
 
 	draw: () => {
@@ -34,9 +52,12 @@ var inv = {
 			inv.up_panel.draw(gui_cnv);
 			inv.close_btn.draw(gui_cnv);
 
-			for(let i in inv.tabs_icon){
-				inv.tabs_icon[i].draw(gui_cnv);
+			new rect(0,480,512,32,"#333").draw(gui_cnv);
+			for(let i in inv.tabs_arrows){
+				inv.tabs_arrows[i].draw(gui_cnv);
 			}
+			inv.tabs[inv.now_tab].icon.draw(gui_cnv);
+
 			switch(inv.now_tab){
 				case 0:
 					if(player.params.hp<=0){
@@ -49,14 +70,17 @@ var inv = {
 						text(gui_cnv,"LVL: "+player.params.lvl,32,128+64,"#AAA","32px Pixel Cyr, monospace");
 					}
 				break;
+//
+// ====================================================================================================
+//
 				case 2:
 					let tmp = searchPlayer();
-					inv.interaction_panel[0].active = 1;
+					inv.tabs[inv.now_tab].use_panel[0].active = 1;
 					for(let i in mapChangers){
 						if(player.room==mapChangers[i][1]){
 							if( pointInObj({x: tmp[0], y: tmp[1]}, mapChangers[i][0])){
-								inv.interaction_panel[0].active = 0;
-								inv.interaction_panel[0].next_loc = mapChangers[i][2];
+								inv.tabs[inv.now_tab].use_panel[0].active = 0;
+								inv.tabs[inv.now_tab].use_panel[0].next_loc = mapChangers[i][2];
 								break;
 							}
 						}
@@ -64,11 +88,25 @@ var inv = {
 
 
 
-					for(let i in inv.interaction_panel){
-						inv.interaction_panel[i].draw(gui_cnv);
+					for(let i in inv.tabs[inv.now_tab].use_panel){
+						inv.tabs[inv.now_tab].use_panel[i].draw(gui_cnv);
 					}
 					text(gui_cnv,"Сменить локацию",32,64,"#AAA","32px Pixel Cyr, monospace");
 				break;
+//
+// ====================================================================================================
+//
+				case 3:
+					inv.tabs[inv.now_tab].use_panel[0].active = game_settings.dev;
+
+					for(let i in inv.tabs[inv.now_tab].use_panel){
+						inv.tabs[inv.now_tab].use_panel[i].draw(gui_cnv);
+					}
+					text(gui_cnv,"Режим разработчика",32,64,"#AAA","32px Pixel Cyr, monospace");
+				break;
+//
+// ====================================================================================================
+//
 			}
 
 			if(player.game_class==5){
@@ -126,21 +164,37 @@ var inv = {
 			return;
 		}
 
-		for(let i in inv.tabs_icon){
-			if(pointInObj(cOPos, tmpRect(inv.tabs_icon[i]))){
-				inv.now_tab = +i;
+		for(let i in inv.tabs_arrows){
+			if(pointInObj(cOPos, tmpRect(inv.tabs_arrows[i]))){
+				switch(+i){
+					case 0:
+						inv.now_tab = inv.now_tab==0?(inv.tabs.length-1):(+inv.now_tab-1);
+					break;
+					case 1:
+						inv.now_tab = inv.now_tab==(inv.tabs.length-1)?0:(+inv.now_tab+1);
+					break;
+				}
 			}
 		}
 
-		if(inv.now_tab==2){
-			for(let i in inv.interaction_panel){
-				if(pointInObj(cOPos, tmpRect(inv.interaction_panel[i]))){
-					if(i==0 && inv.interaction_panel[i].active==0){
-						player.room=inv.interaction_panel[i].next_loc; // Устанавливаем нужную локацию
-						game.draw_map();
+		switch(inv.now_tab){
+			case 2:
+				for(let i in inv.tabs[inv.now_tab].use_panel){
+					if(pointInObj(cOPos, tmpRect(inv.tabs[inv.now_tab].use_panel[i]))){
+						if(i==0 && inv.tabs[inv.now_tab].use_panel[i].active==0){
+							player.room=inv.tabs[inv.now_tab].use_panel[i].next_loc; // Устанавливаем нужную локацию
+							game.draw_map();
+						}
 					}
 				}
-			}
+			break;
+			case 3:
+				for(let i in inv.tabs[inv.now_tab].use_panel){
+					if(pointInObj(cOPos, tmpRect(inv.tabs[inv.now_tab].use_panel[i]))){
+						game_settings.dev = !game_settings.dev;
+					}
+				}
+			break;
 		}
 	},
 	keyup_event: e => {

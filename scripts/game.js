@@ -37,16 +37,39 @@ var game = {
 			if(npc[i][0]==player.room) enemyTextures[1].img.draw(game_cnv, npc[i][2].x*size, npc[i][2].y*size, size, size);
 		}
 
-		for(let i in angryBots){
-			if (angryBots[i].room==player.room) {
-				enemyTextures[2].img.draw(game_cnv, angryBots[i].pos.x*size, angryBots[i].pos.y*size, size, size);
+		if(game_settings.dev==true){
+			for(let i in angryBots){
+				if (angryBots[i].room==player.room) {
+					let botPos = angryBots[i].pos;
+					let botRoom = angryBots[i].room;
+					for(let i = 0; i < 9; i++){
+						let y = Math.floor(i/3);
+						let x = i-3*y;
+						new rect((botPos.x+x-1)*size,(botPos.y+y-1)*size,size,size,"rgba(127,0,0,0.25)").draw(game_cnv);
+					}
+				}
+			}
+
+			for(let i = 0; i < 9; i++){
+				let y = Math.floor(i/3);
+				let x = i-3*y;
+				if(player.can_go(+playerPos[player.room].x+x-1, +playerPos[player.room].y+y-1))
+					new rect((+playerPos[player.room].x+x-1)*size,(+playerPos[player.room].y+y-1)*size,size,size,"rgba(127,127,127,0.25)").draw(game_cnv);
+			}
+
+			let oldPosSize = 16;
+
+			for(let i in player.old_positions){
+				new rect(player.old_positions[i].x*size+oldPosSize*1.5,player.old_positions[i].y*size+oldPosSize*1.5,oldPosSize,oldPosSize,"rgba(127,0,0,"+(0.4-(0.1*i))+")").draw(game_cnv);
 			}
 		}
 
-		let oldPosSize = 16;
-
-		for(let i in player.old_positions){
-			new rect(player.old_positions[i].x*size+oldPosSize*1.5,player.old_positions[i].y*size+oldPosSize*1.5,oldPosSize,oldPosSize,"rgba(0,127,0,"+(0.4-(0.1*i))+")").draw(game_cnv);
+		for(let i in angryBots){
+			if (angryBots[i].room==player.room) {
+				let botPos = angryBots[i].pos;
+				let botRoom = angryBots[i].room;
+				enemyTextures[2].img.draw(game_cnv, botPos.x*size, botPos.y*size, size, size);
+			}
 		}
 
 		enemyTextures[0].img.draw(game_cnv, playerPos[player.room].x*size, playerPos[player.room].y*size, size, size);
@@ -117,11 +140,12 @@ var player = {
 			let pos = searchPlayer(); // Находим персонажа
 
 			if(x==pos[0] && y==pos[1]){return false;} // Не переместиться в себя
+			if(x>7||y>7||x<0||y<0){return false;}
 			for(let i in npc){
 				if(npc[i][0]==player.room && x==npc[i][2].x && y==npc[i][2].y){return false;} // Не переместиться в NPC
 			}
 			for(let i in angryBots){
-				if(angryBots[i][0]==player.room && x==angryBots[i][1].x && y==angryBots[i][1].y){return false;} // Не переместиться в бота
+				if(angryBots[i].room==player.room && x==angryBots[i].pos.x && y==angryBots[i].pos.y){return false;} // Не переместиться в бота
 			}
 			if(mapTextures[map[player.room][y][x]].solid){return false;} // Не переместиться в стенку
 
